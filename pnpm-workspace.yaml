@@ -1,0 +1,8 @@
+packages:
+  - packages/*
+  - examples/*
+
+# One version for every Effect package, pinned exactly (ADR-0004).
+# Workspace packages depend on these with "catalog:".
+catalog:
+  effect: 4.0.6
