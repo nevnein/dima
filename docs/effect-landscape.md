@@ -2,7 +2,7 @@
 
 Back to [CONTEXT](CONTEXT.md).
 
-What Effect already provides, what Toolbelt adds on top, and the facts we
+What Effect already provides, what Dima adds on top, and the facts we
 verified in the installed source. This is the reference for "is this already
 in Effect?" — check it before building anything.
 
@@ -35,7 +35,7 @@ separate, and **all share one version number** with `effect`.
 | `effect/observability` | OTLP (traces, logs, metrics), Prometheus |
 | `effect/ai` | `McpServer`, `McpClient`, `Tool`, `Toolkit`, language-model clients |
 | `effect/testing` | `TestClock`, `TestConsole`, … |
-| Also | `effect/devtools`, `effect/workers`, `effect/process`, `effect/socket`, `effect/eventlog`, `effect/reactivity`, `effect/graphql` |
+| Also | `effect/devtools`, `effect/workers`, `effect/process`, `effect/socket`, `effect/net`, `effect/encoding`, `effect/eventlog`, `effect/reactivity`, `effect/graphql` |
 | `@effect/platform-node` | Node adapter: `NodeRuntime.runMain`, HTTP server, filesystem, cluster sockets |
 | `@effect/sql-pg`, `@effect/sql-mysql2`, `@effect/sql-sqlite-node`, … | SQL drivers (see below) |
 | `@effect/vitest`, `@effect/opentelemetry` | Testing, full OpenTelemetry SDK integration |
@@ -79,7 +79,7 @@ Checked in the installed source or on npm; each one shaped a decision.
 
 | Fact | Where | Used by |
 | ---- | ----- | ------- |
-| SQL drivers at 4.0.6: `sql-pg`, `sql-mysql2`, `sql-mssql`, `sql-sqlite-node`, `sql-sqlite-bun`, `sql-libsql`, `sql-d1`, `sql-clickhouse`. No v4 `sql-kysely` or `sql-drizzle` | npm | [ADR-0011](adr/0011-storage-engines-and-framework-state.md) |
+| SQL drivers at 4.0.6: `sql-pg`, `sql-mysql2`, `sql-mssql`, `sql-sqlite-node`, `sql-sqlite-bun`, `sql-libsql`, `sql-d1`, `sql-clickhouse`, `sql-pglite` (PGlite as a `SqlClient`, so in-process Postgres tests need no socket shim). No v4 `sql-kysely` or `sql-drizzle` | npm | [ADR-0011](adr/0011-storage-engines-and-framework-state.md) |
 | Cluster, workflow and persistence storage have code paths for pg, mysql, mssql and sqlite | `cluster/SqlMessageStorage.ts` | ADR-0011 |
 | `PersistedQueue` (SQL) polls (default 1 s, plus an in-process nudge) and claims with `FOR UPDATE SKIP LOCKED`; no `LISTEN/NOTIFY`. It supports delay, retry schedule, max attempts (default 10) and dedupe by id | `persistence/PersistedQueue.ts` | [ADR-0014](adr/0014-background-work.md) |
 | `Cron` supports time zones (`tz`) | `Cron.ts` | ADR-0014 |
@@ -91,18 +91,19 @@ Checked in the installed source or on npm; each one shaped a decision.
 | `Logger.toFile`, `ErrorReporter` exist; traces export only over OTLP HTTP or the DevTools WebSocket; no file exporter | `Logger.ts`, `ErrorReporter.ts`, `observability/` | [ADR-0016](adr/0016-local-observability-for-agents.md) |
 | `McpServer` over stdio and HTTP | `ai/McpServer.ts` | ADR-0016 |
 | `@effect/tsgo` targets TypeScript 7 and Effect v4; `@effect/language-service` has a CLI `diagnostics` command; diagnostics include `floatingEffect`, `missingReturnYieldStar`, `leakingRequirements`, `outdatedApi`, `asyncFunction`, `globalFetch` | npm, READMEs | ADR-0007 |
+| Many catalogue rules already exist as Effect diagnostics: `processEnv`, `globalDate`, `globalFetch`, `globalRandom`, `globalTimers`, `globalConsole`, `asyncFunction`, `newPromise`, `preferSchemaTaggedError`, `extendsNativeError` (each with an `…InEffect` variant where relevant). Off by default but enabled here: `apiStabilityLeak`, `deterministicKeys`, `effectDoNotation`, `nodeBuiltinImport`, `strictEffectProvide`, and `preferSchemaOverJson` (inside Effect code only). With `effect-tsgo patch`, all fail `tsc` like type errors; `@ts-ignore` would hide them, so oxlint bans TypeScript suppression comments | `@effect/tsgo` README, probed 2026-10-25 | ADR-0007 |
 | No official Effect docs MCP for v4 and no `llms.txt` on effect.website; the package's `AGENTS.md` and `ai-docs` are the official agent surface | web, 2026-10-24 | [ADR-0005](adr/0005-kernel-recipes-and-agent-knowledge.md) |
 
-## What Toolbelt adds
+## What Dima adds
 
 | Concern | Effect provides | Kernel adds | Recipes provide |
 | ------- | --------------- | ----------- | --------------- |
-| Guardrails | Types, diagnostics | Rule catalogue, `toolbelt check`, integrity, escape hatches, baseline | — |
+| Guardrails | Types, diagnostics | Rule catalogue, `dima check`, integrity, escape hatches, baseline | — |
 | HTTP | `HttpApi`, `HttpRouter` | Access declarations, generated authorization tests, data-access boundary | API structure, handlers |
 | Data | `effect/sql`, `Migrator`, drivers | Query budget, migration lint, sandbox registry, environment guard; later introspection and drift | SQL setup, migrations, repositories |
 | Auth | `HttpApiMiddleware`, `HttpApiSecurity` | `CurrentPrincipal`, `Policy`, `asSystem` | better-auth, external-jwt/OIDC, existing-session |
 | Background work | `PersistedQueue`, `ClusterCron`, `effect/workflow` | `Job`, schedules, events, failed-job store, `jobs` commands, duplicate-run tests | — |
-| Observability | `Logger`, `Tracer`, OTLP, `ErrorReporter` | Local telemetry sink, `toolbelt dev …` commands, MCP wrapper | — |
+| Observability | `Logger`, `Tracer`, OTLP, `ErrorReporter` | Local telemetry sink, `dima dev …` commands, MCP wrapper | — |
 | Setup | `effect/cli` | Decision schema, decision guides, setup, installation flow | — |
 | Mail, storage | `FileSystem` (local) | Contracts and test fakes | Provider adapters (SMTP, Resend, S3, …) |
-| Deployment, CI, verification | — | `toolbelt verify` contract | Dockerfile, CI, verify harness |
+| Deployment, CI, verification | — | `dima verify` contract | Dockerfile, CI, verify harness |

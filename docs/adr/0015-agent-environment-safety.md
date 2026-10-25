@@ -21,13 +21,13 @@ produce.
    migrations run in the pipeline at deploy time, gated by approvals outside
    the agent's control. Setup records the pipeline and warns if there is none.
 3. **Sandbox rule:** agents write to or create databases only in throwaway
-   instances the toolchain created. `toolbelt sandbox up` records each instance
+   instances the toolchain created. `dima sandbox up` records each instance
    in a local registry; PGlite and SQLite instances are recognized directly.
    Writing CLI commands (migrate, seed, reset, drop, create database) run only
    on registered instances or on `localhost` with `APP_ENV` `local`/`test`,
    and can't be overridden. The running production app is unaffected.
 4. **In-process engines first;** containers only when unavoidable (MySQL),
-   started through the narrow `toolbelt sandbox` command, never by giving the
+   started through the narrow `dima sandbox` command, never by giving the
    agent the Docker socket, which is root-equivalent on the host.
 5. **Agents never connect to production**, not even read-only. Real data for
    debugging comes later, as a masked snapshot loaded into a sandbox.
@@ -38,7 +38,7 @@ produce.
    that pushes deploy to preview or staging at most and that production always
    needs manual approval.
 8. Tool-specific permissions (for example, not reading `.env*`) are generated
-   optionally by `toolbelt agents init --for <tool>`.
+   optionally by `dima agents init --for <tool>`.
 
 ## Consequences
 

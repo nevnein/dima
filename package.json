@@ -1,9 +1,26 @@
 {
-  "name": "toolbelt-monorepo",
+  "name": "dima-monorepo",
   "private": true,
+  "license": "MIT",
   "type": "module",
   "packageManager": "pnpm@12.15.0",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "prepare": "effect-tsgo patch --typescript",
+    "typecheck": "tsc",
+    "lint": "oxlint --report-unused-disable-directives-severity=error",
+    "test": "vitest run",
+    "check": "pnpm typecheck && pnpm lint && pnpm test"
+  },
   "devDependencies": {
-    "effect": "catalog:"
+    "@effect/tsgo": "catalog:",
+    "@effect/vitest": "catalog:",
+    "@types/node": "catalog:",
+    "effect": "catalog:",
+    "oxlint": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
   }
 }

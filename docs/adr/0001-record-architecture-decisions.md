@@ -6,7 +6,7 @@
 
 ## Context
 
-Toolbelt is built mostly by coding agents, which read the repository cold at
+Dima is built mostly by coding agents, which read the repository cold at
 the start of every task. A decision that lives only in a conversation is lost
 to them, and an outdated description of the project steers them toward the
 wrong design. The project was restarted once already for this reason: its
@@ -17,8 +17,8 @@ changed.
 
 We will keep Architecture Decision Records in `docs/adr/`, one decision per
 file, using [`template.md`](template.md) and the process in
-[`README.md`](README.md). ADRs record decisions about Toolbelt itself.
-Decisions taken inside a project that uses Toolbelt live in that project's
+[`README.md`](README.md). ADRs record decisions about Dima itself.
+Decisions taken inside a project that uses Dima live in that project's
 decision log (ADR-0009), not here.
 
 Specs in `docs/specs/` describe a module's behaviour and public API. They are

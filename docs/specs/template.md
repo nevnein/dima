@@ -1,7 +1,7 @@
 # SPEC-NNNN: Module name
 
 - **Status:** Implemented
-- **Artifact:** kernel (`toolbelt/…`) or recipe (`recipes/…`)
+- **Artifact:** kernel (`@nevnein/dima/…`) or recipe (`recipes/…`)
 - **Related:** ADR-XXXX
 - **Built on:** Effect modules this uses — check [effect-landscape.md](../effect-landscape.md) first
 - **Slice:** the proof-of-concept slice that built it

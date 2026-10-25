@@ -1,0 +1,26 @@
+{
+  "name": "@nevnein/dima",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Guardrails and starting points that let coding agents build backends fast and safely, built on Effect v4",
+  "license": "MIT",
+  "author": "Adam Di Mario",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nevnein/dima.git",
+    "directory": "packages/dima"
+  },
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "peerDependencies": {
+    "effect": "catalog:"
+  },
+  "devDependencies": {
+    "@effect/sql-pglite": "catalog:",
+    "@effect/vitest": "catalog:",
+    "effect": "catalog:",
+    "vitest": "catalog:"
+  }
+}

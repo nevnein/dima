@@ -6,7 +6,7 @@
 
 ## Context
 
-The guardrails Toolbelt needs (typed errors, tracked dependencies, resource
+The guardrails Dima needs (typed errors, tracked dependencies, resource
 safety, tracing, test layers) are what Effect provides. Effect v4 also ships
 HTTP APIs, SQL, CLI, persistence, cluster, workflow, AI/MCP and observability
 modules (see [effect-landscape.md](../effect-landscape.md)).
@@ -19,10 +19,10 @@ choosing freely among them produce inconsistent code.
 
 1. We build on **Effect v4** and expose Effect types directly. Users and agents
    write plain Effect code.
-2. Toolbelt **narrows** Effect to **one idiom per concern**, enforced by Effect
+2. Dima **narrows** Effect to **one idiom per concern**, enforced by Effect
    diagnostics and the rule catalogue (ADR-0007), and documented in a short
    "use X, never Y" table in the kernel's `AGENTS.md`.
-3. Toolbelt **never wraps** Effect behind its own API. Narrowing happens
+3. Dima **never wraps** Effect behind its own API. Narrowing happens
    through types, diagnostics and lint, not through a parallel surface.
 4. There is **no Module type, no service container, no string-keyed lookup**.
    Functionality is plain services and layers. Where a registry is needed, it
@@ -31,7 +31,7 @@ choosing freely among them produce inconsistent code.
 
 ## Consequences
 
-- What is learned in Toolbelt transfers to Effect and back.
+- What is learned in Dima transfers to Effect and back.
 - Missing dependencies are compile-time errors (unsatisfied `R`).
 - The narrowing must be maintained as Effect evolves; it lives in the kernel,
   so it updates centrally.

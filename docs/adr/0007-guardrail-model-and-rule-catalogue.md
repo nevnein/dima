@@ -33,7 +33,7 @@ possible:
 **The rule catalogue** is tool-neutral and lives in the kernel. Each rule has
 an ID, intent, severity, the mechanism that enforces it, and an error message
 that states the fix. Backends render it into a specific tool's configuration
-(`toolbelt lint init --tool oxlint|eslint`). Custom rules are written once for
+(`dima lint init --tool oxlint|eslint`). Custom rules are written once for
 ESLint's plugin API, which oxlint's JS plugins also use; Biome is best-effort.
 **oxlint** is the default for new projects. The integrity check reports which
 catalogue rules a project's linter doesn't enforce.
@@ -41,7 +41,7 @@ catalogue rules a project's linter doesn't enforce.
 **Initial catalogue themes:** one idiom per concern (ADR-0003); no raw data
 client outside repositories; outbound calls only through the kernel client;
 no `process.env` outside the configuration layer; no mutable module-level
-state; no casts to kernel-branded types; no imports outside the Toolbelt
+state; no casts to kernel-branded types; no imports outside the Dima
 subtree except from the border folder (ADR-0012).
 
 ## Consequences

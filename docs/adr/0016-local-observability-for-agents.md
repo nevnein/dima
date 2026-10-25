@@ -19,7 +19,7 @@ DevTools WebSocket; there is no file exporter.
    timings) and errors (full `Cause`, span path, request), with rotation. Built
    from a custom `Tracer`, `Logger.toFile` and `ErrorReporter`. Production is
    unchanged: OTLP export enabled by configuration.
-2. **CLI first:** `toolbelt dev errors`, `dev logs --trace <id>`,
+2. **CLI first:** `dima dev errors`, `dev logs --trace <id>`,
    `dev trace <id>`, `dev routes` (with access declarations), `dev config`
    (redacted), `dev db` (schema and migrations), `dev sql` (read-only, sandbox
    or local only), `dev docs <query>` (kernel and Effect docs, read in place).

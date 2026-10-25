@@ -8,7 +8,7 @@
 
 Effect v4 labels every module: **stable** (strict semver), **unstable** (may
 break in minor releases), **experimental** (may break in patches). Most
-modules Toolbelt relies on are unstable: `http-api`, `sql`, `persistence`,
+modules Dima relies on are unstable: `http-api`, `sql`, `persistence`,
 `cluster`, `workflow`, `ai`. Effect's packages (`effect`, `@effect/platform-*`,
 `@effect/sql-*`) share one version number and must be upgraded together.
 
@@ -18,7 +18,7 @@ modules Toolbelt relies on are unstable: `http-api`, `sql`, `persistence`,
    same version for every `@effect/*` package, through the `catalog` in
    `pnpm-workspace.yaml`. Workspace packages use `"catalog:"`.
 2. **Upgrades are deliberate.** Each Effect upgrade is its own change: full
-   `toolbelt check --full`, and a re-survey of
+   `dima check --full`, and a re-survey of
    [effect-landscape.md](../effect-landscape.md).
 3. **Same stability labels.** Every kernel module declares stable, unstable or
    experimental with Effect's meanings, and can be no more stable than what it
@@ -34,6 +34,9 @@ modules Toolbelt relies on are unstable: `http-api`, `sql`, `persistence`,
 - Projects get a tested combination of Effect versions.
 - Upstream breakage reaches the kernel first, where it is absorbed once.
 - A project needing a newer Effect waits for a kernel release.
+- On 0.x, npm's caret ranges treat a minor bump as breaking (`^0.1.0` does
+  not match `0.2.0`), so a breaking kernel change bumps the minor version and
+  everything else bumps the patch. The first published version is `0.1.0`.
 
 ## Alternatives considered
 

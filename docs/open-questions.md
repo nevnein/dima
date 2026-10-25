@@ -7,14 +7,6 @@ outcome in an ADR, link it here, and move the entry to **Resolved**.
 
 ## Open
 
-### OQ-1 — Final name and npm scope
-"Toolbelt" is a placeholder. The kernel is published as one npm package, so
-the name must be available on npm, ideally also as a GitHub org. The unscoped
-`toolbelt` name is likely taken. Decide before the first publish.
-
-### OQ-2 — License
-MIT is the default assumption.
-
 ### OQ-3 — To verify while building
 Facts a decision depends on that we haven't confirmed yet:
 - Better Auth: custom password hash/verify functions (needed to keep existing
@@ -24,6 +16,24 @@ Facts a decision depends on that we haven't confirmed yet:
 - MariaDB through `@effect/sql-mysql2`.
 - PGlite behaviour under concurrent `SKIP LOCKED` claims, for queue tests.
 - Express/Nest adapter for `toWebHandler` output.
+
+### OQ-4 — Kernel build and package contents
+Node doesn't strip types from files under `node_modules`, so the kernel can't
+ship raw `.ts`. Decide when slice 1 adds the first export. Recommended, and
+probed on 2026-10-25 with the patched `tsc`:
+- **Build with `tsc` only**, from a `packages/dima/tsconfig.build.json` that
+  extends the root config with `rewriteRelativeImportExtensions`,
+  `declaration`, `declarationMap` and `sourceMap`, into `dist/`. No bundler:
+  the kernel is Node-only and ESM-only (ADR-0018), and keeping one file per
+  module keeps subpath exports and stack traces readable. Source keeps its
+  `.ts` imports; emitted JS gets `.js`, and consumers resolve the `.ts`
+  specifiers left in `.d.ts` files to the declarations.
+- **`files`:** `dist`, `src` (declaration maps then lead agents to the real
+  source), `AGENTS.md` and the kernel docs (ADR-0005).
+- **`exports`:** one entry per public module, `types` and `default` pointing
+  into `dist`; nothing else is importable.
+- **Publish checks:** `publint` and `@arethetypeswrong/cli` before each
+  release.
 
 ## Parked ideas
 
@@ -43,7 +53,7 @@ Not in scope now; worth revisiting.
 
 | Question | Outcome |
 | -------- | ------- |
-| What Toolbelt is | Guardrails and starting points for agent-built backends — [ADR-0002](adr/0002-vision-and-principles.md) |
+| What Dima is | Guardrails and starting points for agent-built backends — [ADR-0002](adr/0002-vision-and-principles.md) |
 | Framework package or templates | Kernel, recipes and agent knowledge — [ADR-0005](adr/0005-kernel-recipes-and-agent-knowledge.md) |
 | ORM, relations, query builder | Out of scope; typed SQL plus guardrails — ADR-0002 |
 | App structure and discovery | Recipes and setup — [ADR-0009](adr/0009-setup-installation-and-decision-log.md) |
@@ -51,4 +61,6 @@ Not in scope now; worth revisiting.
 | Runtime support | Node only — [ADR-0018](adr/0018-runtime-deployment-and-scaling.md) |
 | Auth scope | Kernel authorization, auth as recipes — [ADR-0013](adr/0013-authentication-and-authorization.md) |
 | `Application` type | No; the app skeleton is a recipe — ADR-0005 |
+| Name and npm package | Dima, `@nevnein/dima` — [ADR-0019](adr/0019-name-and-package.md) |
+| License | MIT for the kernel, recipes and docs — [`LICENSE`](../LICENSE) |
 | AI-first repository | ADR-0005, [ADR-0006](adr/0006-agent-agnostic-standards-and-cli.md), [ADR-0017](adr/0017-verification-loop-and-evaluation.md) |

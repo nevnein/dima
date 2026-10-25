@@ -2,7 +2,23 @@ packages:
   - packages/*
   - examples/*
 
-# One version for every Effect package, pinned exactly (ADR-0004).
-# Workspace packages depend on these with "catalog:".
+# Supply-chain settings, stated explicitly so they don't depend on pnpm's
+# defaults (ADR-0004, ADR-0015).
+minimumReleaseAge: 1440 # minutes: only install versions published a day ago or more
+trustPolicy: no-downgrade # refuse versions published with weaker provenance than earlier ones
+blockExoticSubdeps: true # dependencies of dependencies may not come from git or tarball URLs
+strictDepBuilds: true # fail on dependency install scripts that aren't explicitly allowed
+
+# Every dependency is pinned exactly here (ADR-0004); Effect packages share
+# one version. Workspace packages depend on these with "catalog:".
+# @types/node matches the oldest supported Node (engines: >=24).
 catalog:
   effect: 4.0.6
+  "@effect/platform-node": 4.0.6
+  "@effect/sql-pglite": 4.0.6
+  "@effect/vitest": 4.0.6
+  "@effect/tsgo": 0.56.0
+  "@types/node": 24.19.2
+  oxlint: 1.89.0
+  typescript: 7.0.2
+  vitest: 5.0.5

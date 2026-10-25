@@ -23,7 +23,7 @@ their users, and apps behind an identity provider (Cognito, Entra, …).
    provided by authentication middleware through `provides`.
 2. **Every endpoint declares its access:** `public`, `authenticated` or
    `policy("name")`. An undeclared endpoint fails at startup and in
-   `toolbelt check`.
+   `dima check`.
 3. **Authorization tests are generated from the API definition:** anonymous
    requests to non-public endpoints are rejected, and every policy endpoint
    must supply an *allowed* and a *denied* fixture (the denied pair is the
@@ -31,7 +31,7 @@ their users, and apps behind an identity provider (Cognito, Entra, …).
 4. **Policies are plain functions** behind `Policy.authorize`, failing with a
    typed `Forbidden`, with table-driven tests for their logic.
 5. **`Policy.asSystem(reason)`** with fixed reasons is the only escape: logged
-   at runtime, listed and reported by `toolbelt review-exceptions`.
+   at runtime, listed and reported by `dima review-exceptions`.
 6. A denied resource returns **404** by default (403 opt-in); not logged in
    returns 401.
 

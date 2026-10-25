@@ -16,7 +16,7 @@ next agent needs.
 
 1. **The kernel CLI owns the decision schema:** what can be asked, allowed
    values, validation and auto-detection. An agent drives the interview through
-   a skill and passes the answers to `toolbelt setup --answers <file>`; a human
+   a skill and passes the answers to `dima setup --answers <file>`; a human
    can run the same CLI interactively. Reruns overwrite and converge.
 2. **Two levels.** *Project setup* runs once and can be rerun (database,
    runtime, deployment, adoption mode, conventions, agent adapters).
@@ -26,7 +26,7 @@ next agent needs.
    (files, dependencies, env vars, decisions; nothing written) → **apply** (the
    CLI does the mechanical part; the agent follows the recipe's `INSTALL.md`
    for the judgment part) → **prove** (the recipe's shipped tests, then
-   `toolbelt check`) → **record**.
+   `dima check`) → **record**.
 4. **Recipe layout:**
 
    ```

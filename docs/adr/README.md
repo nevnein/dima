@@ -2,10 +2,10 @@
 
 Back to [CONTEXT](../CONTEXT.md).
 
-An ADR captures **one** significant decision about Toolbelt itself: the context
+An ADR captures **one** significant decision about Dima itself: the context
 that forced it, what we decided, and what follows from it. ADRs explain *why*
 the code looks the way it does long after the discussion is forgotten.
-Decisions taken inside a project that uses Toolbelt go in that project's
+Decisions taken inside a project that uses Dima go in that project's
 decision log instead ([ADR-0009](0009-setup-installation-and-decision-log.md)).
 
 ## When to write one

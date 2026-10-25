@@ -27,7 +27,7 @@ decision matters most. Effect's own agent docs don't cover these choices.
 
    Rule of thumb: cheap to reverse → `agent`; expensive → `ask`;
    organizational → `user`.
-3. **Each choice records when to revisit it**, and `toolbelt check` reports
+3. **Each choice records when to revisit it**, and `dima check` reports
    triggers it can detect.
 4. **Initial guides:** background work, data and framework-state storage,
    adoption mode, authentication, API shape, deployment and instances,

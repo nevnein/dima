@@ -14,12 +14,12 @@ part any more. The hard parts are:
 - adapting it to an existing context (database, conventions, infrastructure),
 - choosing the right paradigm and infrastructure for each problem.
 
-Toolbelt is a personal toolkit, not a market product. It should also save the
+Dima is a personal toolkit, not a market product. It should also save the
 author from starting from scratch on every project.
 
 ## Decision
 
-Toolbelt is **a set of guardrails and starting points that let agents build
+Dima is **a set of guardrails and starting points that let agents build
 backends fast and safely**, built on Effect v4. It is not a Laravel-style
 framework: no generators, no ORM, no magic.
 
@@ -32,7 +32,7 @@ Its principles, ordered from purpose to means:
    enforced, never just documented, in order of strength: unrepresentable,
    diagnostics, lint, generated tests, runtime guards. Every escape is
    declared, has a reason, and gets reviewed (ADR-0007, ADR-0008).
-3. **Prove it works.** `toolbelt check` and `toolbelt verify`. Done means
+3. **Prove it works.** `dima check` and `dima verify`. Done means
    evidence, not "it compiles". Every service can be replaced with a test
    layer, and time-dependent code works with `TestClock` (ADR-0017).
 4. **Adapt to the context.** Detect first, ask what can't be detected, adopt

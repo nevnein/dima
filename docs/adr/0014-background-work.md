@@ -27,7 +27,7 @@ workflows have no versioning for in-flight instances yet.
    | Workflow | opt-in, `effect/workflow` + `SingleRunner` | version in the name (`Name/v2`), drain before removal |
 
 2. **Everything lives in the kernel**, including a failed-job store,
-   `toolbelt jobs failed|retry`, per-job concurrency limits, cleanup of old
+   `dima jobs failed|retry`, per-job concurrency limits, cleanup of old
    executions, `pollInterval` per job (default 1 second), and `TestClock`
    helpers. It updates centrally as Effect's workflow modules mature.
 3. **Duplicate-run tests:** each job is run twice with the same key in tests;

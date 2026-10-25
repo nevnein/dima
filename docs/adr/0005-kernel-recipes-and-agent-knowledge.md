@@ -6,7 +6,7 @@
 
 ## Context
 
-Toolbelt has to do two things that pull in opposite directions:
+Dima has to do two things that pull in opposite directions:
 
 - **enforce invariants** agents must not break, which needs code the project
   can't casually edit and that updates across projects;
@@ -18,11 +18,11 @@ Rails 8's auth generator make the same split.
 
 ## Decision
 
-Toolbelt ships three artifacts:
+Dima ships three artifacts:
 
 | Artifact | Job | Who changes it | How it updates |
 | --- | --- | --- | --- |
-| **Kernel** (npm package `toolbelt`) | Invariants: guardrails, contracts, generic infrastructure | Only this repo | Version bump |
+| **Kernel** (npm package `@nevnein/dima`) | Invariants: guardrails, contracts, generic infrastructure | Only this repo | Version bump |
 | **Recipes** (`recipes/`) | Starting points adapted to the project | The project, after installation | Never: installed recipes are owned and not synced |
 | **Agent knowledge** (skills, `AGENTS.md`, decision guides) | How to choose, adapt and verify | Only this repo | Ships inside the kernel |
 
@@ -30,7 +30,7 @@ Toolbelt ships three artifacts:
 introduce, it goes in the kernel. If it's where the project's specifics show
 up, it's a recipe.
 
-- **Kernel:** the rule catalogue and diagnostics preset, `toolbelt check` and
+- **Kernel:** the rule catalogue and diagnostics preset, `dima check` and
   `verify`, test helpers, environment guard and sandbox registry, the
   authorization primitives, background work (ADR-0014), the telemetry sink and
   `dev` commands, setup and the decision schema, contracts with test fakes
@@ -38,17 +38,17 @@ up, it's a recipe.
 - **Recipes:** app skeleton and wiring, HTTP API structure, SQL setup and
   migrations, auth integrations, mail and storage adapters, Dockerfile, CI,
   verification harness.
-- **Agent knowledge is read in place** from `node_modules/toolbelt/`: no
+- **Agent knowledge is read in place** from `node_modules/@nevnein/dima/`: no
   copying, no sync command, always matching the installed kernel. Project
   setup adds a short pointer section to the project's `AGENTS.md`, and the
   integrity check verifies it is there. Kernel procedures that would be
   slash-command skills are CLI commands (for example
-  `toolbelt review-exceptions`).
+  `dima review-exceptions`).
 
 **Repository layout** (pnpm workspace):
 
 ```
-packages/toolbelt/   the kernel (npm: toolbelt)
+packages/dima/       the kernel (npm: @nevnein/dima)
 recipes/             recipe sources (not published as packages)
 examples/            example apps, assembled from recipes, tested in CI
 docs/                this documentation

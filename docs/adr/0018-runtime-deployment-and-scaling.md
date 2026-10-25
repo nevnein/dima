@@ -6,7 +6,7 @@
 
 ## Context
 
-Toolbelt is for personal use: supporting two runtimes doubles CI and driver
+Dima is for personal use: supporting two runtimes doubles CI and driver
 choices for little gain. Background work (ADR-0014) needs long-running
 processes. Scaling to many instances is rarely needed early, but is expensive
 to retrofit if the code assumes one instance.
@@ -28,7 +28,7 @@ to retrofit if the code assumes one instance.
    limiter and cache on SQL when more than one instance is possible), jobs are
    idempotent, cron and workflows go through `ClusterCron` and the workflow
    engine, sessions live in the database.
-6. `toolbelt check` **fails** when the deployment guide records more than one
+6. `dima check` **fails** when the deployment guide records more than one
    instance alongside in-memory drivers or SQLite framework state.
 7. **Later, multiple instances:** multiple runners on Postgres or MySQL (not
    SQLite), with a multi-instance CI test added only then.

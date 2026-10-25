@@ -17,18 +17,18 @@ trying.
 
 - [x] Git repository and documentation
 - [x] Effect v4, pinned exactly in the pnpm catalog
-- [x] Decisions recorded (ADR-0001 … ADR-0018)
-- [ ] Tooling: TypeScript 7 with `@effect/tsgo`, oxlint, vitest with `@effect/vitest`, PGlite
-- [ ] `packages/toolbelt` scaffold, Node CI
-- [ ] License (OQ-2)
+- [x] Decisions recorded (ADR-0001 … ADR-0019)
+- [x] Tooling: TypeScript 7 patched by `@effect/tsgo` (Effect diagnostics as `tsc` errors), oxlint, vitest with `@effect/vitest`, PGlite through `@effect/sql-pglite`; every dependency pinned in the catalog
+- [x] `packages/dima` scaffold, Node CI (Node 24 and 26, actions pinned by commit SHA)
+- [x] Name (ADR-0019) and license (MIT)
 
 ## Slice 1 — Guardrails
 
 A hand-written example app, no setup or recipes yet.
 
-- [ ] `toolbelt check` (fast by default, `--full`, `--json`, parallel stages, bounded output): type-check with Effect diagnostics, catalogue lint, Squawk, tests, integrity
+- [ ] `dima check` (fast by default, `--full`, `--json`, parallel stages, bounded output): type-check with Effect diagnostics, catalogue lint, Squawk, tests, integrity
 - [ ] Rule catalogue, rendered for oxlint; first rules: one idiom per concern, no `process.env` outside config, no mutable module-level state, no raw data client outside repositories
-- [ ] Escape-hatch format, baseline, `toolbelt review-exceptions`
+- [ ] Escape-hatch format, baseline, `dima review-exceptions`
 - [ ] Environment guard and sandbox registry, PGlite
 - [ ] Query budget test helper
 - [ ] Data-access boundary on handler requirements
@@ -38,7 +38,7 @@ A hand-written example app, no setup or recipes yet.
 
 ## Slice 2 — Setup and recipes
 
-- [ ] Decision schema, project setup (`toolbelt setup --answers`), decision log
+- [ ] Decision schema, project setup (`dima setup --answers`), decision log
 - [ ] Decision guides: data storage, adoption mode
 - [ ] Installation flow (inspect → plan → apply → prove → record), `AGENTS.md` pointer
 - [ ] HTTP + SQL recipe; the slice 1 example rebuilt through installation
@@ -48,8 +48,8 @@ A hand-written example app, no setup or recipes yet.
 ## Slice 3 — Authorization, telemetry, verify
 
 - [ ] `CurrentPrincipal`, access declarations, generated authorization tests, development principal
-- [ ] Local telemetry sink; `toolbelt dev errors | logs | trace | routes`
-- [ ] Minimal `toolbelt verify` (start, health check, authorization tests over HTTP)
+- [ ] Local telemetry sink; `dima dev errors | logs | trace | routes`
+- [ ] Minimal `dima verify` (start, health check, authorization tests over HTTP)
 
 **Checkpoint:** does an agent debug faster, and do the generated tests catch what they should?
 
@@ -62,10 +62,10 @@ A hand-written example app, no setup or recipes yet.
 | Eval | ~10 tasks, two conditions, agent-agnostic harness | [0017](adr/0017-verification-loop-and-evaluation.md) |
 | Remaining guides | background work, authentication, API shape, deployment, verification | [0010](adr/0010-decision-guides.md) |
 | Remaining `dev` commands and MCP wrapper | `dev config`, `dev db`, `dev sql`, `dev docs` | [0016](adr/0016-local-observability-for-agents.md) |
-| Adoption | `toolbelt db introspect`, drift detection, border folder rule, Express/Nest adapter recipe | [0012](adr/0012-adopting-existing-projects.md) |
+| Adoption | `dima db introspect`, drift detection, border folder rule, Express/Nest adapter recipe | [0012](adr/0012-adopting-existing-projects.md) |
 | Migration skill | MySQL/MariaDB and SQLite → Postgres | [0011](adr/0011-storage-engines-and-framework-state.md) |
 | Recipes | CI, deployment (Dockerfile, compose, platform), verify harness, mail and storage adapters | [0005](adr/0005-kernel-recipes-and-agent-knowledge.md), [0018](adr/0018-runtime-deployment-and-scaling.md) |
-| Agent adapters | `toolbelt agents init --for <tool>` | [0006](adr/0006-agent-agnostic-standards-and-cli.md) |
+| Agent adapters | `dima agents init --for <tool>` | [0006](adr/0006-agent-agnostic-standards-and-cli.md) |
 | Other linters | ESLint backend for the rule catalogue | [0007](adr/0007-guardrail-model-and-rule-catalogue.md) |
 
 ## Later / maybe

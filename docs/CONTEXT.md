@@ -1,10 +1,11 @@
-# Toolbelt — Context
+# Dima — Context
 
 > **Start here.** This file is the index of the project's documentation and the
 > shortest path to understanding what we are building, why, and where things
 > stand. Keep it current: if you add a doc, link it here.
 
-"Toolbelt" is a **working name** (see [open questions](open-questions.md)).
+Dima is Italian for a jig: a fixture that guides the tool so every cut is
+repeatable and safe ([ADR-0019](adr/0019-name-and-package.md)).
 
 ## What is this?
 
@@ -13,7 +14,7 @@ backends fast and safely**, built on [Effect](https://effect.website) v4.
 
 Writing code is rarely the hard part any more. The hard parts are keeping
 agent-written code safe and reviewable, adapting it to an existing context,
-and choosing the right paradigm and infrastructure. Toolbelt ships three
+and choosing the right paradigm and infrastructure. Dima ships three
 things for that ([ADR-0005](adr/0005-kernel-recipes-and-agent-knowledge.md)):
 
 - a **kernel** on npm that enforces the invariants agents must not break, and
@@ -33,7 +34,7 @@ From purpose to means ([ADR-0002](adr/0002-vision-and-principles.md)):
    only through the pipeline, nothing is pushed by default.
 2. **Guardrails over generators.** What agents must not get wrong is enforced,
    never just documented. Every escape is declared and reviewed.
-3. **Prove it works.** `toolbelt check` and `toolbelt verify`. Done means
+3. **Prove it works.** `dima check` and `dima verify`. Done means
    evidence.
 4. **Adapt to the context.** Detect, ask what can't be detected, adopt existing
    conventions. Decisions are data, logged, with who may take them.
@@ -49,10 +50,10 @@ From purpose to means ([ADR-0002](adr/0002-vision-and-principles.md)):
 
 | Area | State |
 | ---- | ----- |
-| Repository | pnpm workspace, `effect@4.0.6` installed, docs only — no packages yet |
+| Repository | pnpm workspace, tooling in place (TypeScript 7 + Effect diagnostics, oxlint, vitest, PGlite, CI); `packages/dima` scaffolded, no modules yet |
 | Effect | v4 surveyed at `4.0.6` ([landscape](effect-landscape.md)) |
-| Decisions | 18 ADRs accepted (2026-10-25) |
-| Next | Proof of concept, slice 1 — see [roadmap](roadmap.md) |
+| Decisions | 19 ADRs accepted (2026-10-25) |
+| Next | Slice 1 — guardrails, see [roadmap](roadmap.md) |
 
 ## Documentation map
 
@@ -66,7 +67,7 @@ From purpose to means ([ADR-0002](adr/0002-vision-and-principles.md)):
 | [`open-questions.md`](open-questions.md) | Undecided topics and parked ideas. |
 | [`adr/`](adr/README.md) | **Architecture Decision Records** — *why* we chose what we chose. |
 | [`specs/`](specs/README.md) | **Specifications** — *what* a module does, written after the slice that builds it. |
-| [`guides/`](guides/README.md) | **Guides** — how to use Toolbelt. Written once APIs settle. |
+| [`guides/`](guides/README.md) | **Guides** — how to use Dima. Written once APIs settle. |
 
 ### Architecture Decision Records
 
@@ -90,6 +91,7 @@ From purpose to means ([ADR-0002](adr/0002-vision-and-principles.md)):
 | [0016](adr/0016-local-observability-for-agents.md) | Local observability for agents | Accepted |
 | [0017](adr/0017-verification-loop-and-evaluation.md) | Verification loop and evaluation | Accepted |
 | [0018](adr/0018-runtime-deployment-and-scaling.md) | Runtime, deployment and scaling | Accepted |
+| [0019](adr/0019-name-and-package.md) | Name the project Dima, published as `@nevnein/dima` | Accepted |
 
 ### Specifications
 
@@ -100,7 +102,7 @@ None yet. Specs are written after each proof-of-concept slice
 
 - **Check Effect first.** Before building anything, look it up in
   [effect-landscape.md](effect-landscape.md) and the installed Effect source.
-- **Decide, then record.** Non-trivial choices about Toolbelt get an ADR
+- **Decide, then record.** Non-trivial choices about Dima get an ADR
   ([how](adr/README.md)).
 - **Code, then spec.** A module is built in a proof-of-concept slice; its spec
   describes what actually worked.

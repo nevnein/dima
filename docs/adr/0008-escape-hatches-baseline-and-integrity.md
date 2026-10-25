@@ -16,7 +16,7 @@ Existing projects can't fix every existing violation before adopting.
    where comments are required:
 
    ```ts
-   // toolbelt-allow <rule-id> <reason>: <explanation>
+   // dima-allow <rule-id> <reason>: <explanation>
    ```
 
    Allowed reasons: `legacy` (existing code, not yet migrated), `external` (a
@@ -25,11 +25,11 @@ Existing projects can't fix every existing violation before adopting.
    `false-positive` (the rule is wrong here; report it).
 2. **Tool-native suppressions** (`eslint-disable`,
    `@effect-diagnostics-next-line`, `squawk-ignore`) without an adjacent
-   `toolbelt-allow` fail the integrity check.
+   `dima-allow` fail the integrity check.
 3. **Some rules can't be suppressed at all:** the environment guard and
    authorization. Authorization's only escape is the runtime
    `Policy.asSystem(reason)` (ADR-0013).
-4. **`toolbelt review-exceptions`** lists every escape and `asSystem` call
+4. **`dima review-exceptions`** lists every escape and `asSystem` call
    site, so an agent can judge each one (justified? safer way? notify the
    user?). Security-related exceptions are always reported to the user.
 5. **A baseline file** records existing violations; checks fail only on new
